@@ -1,2 +1,1 @@
-# SmartLoan
-Proyecto Marcos de desarrollo web
+Proyecto de Alfabetización digital
