@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#11101c">
+    <title>TECH ARENA | Desafía tu mente</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="background-effects" aria-hidden="true">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <header class="topbar">
+        <a href="#" class="brand" id="brand-home" aria-label="TECH ARENA, inicio">
+            <span class="brand-icon">TA</span>
+            <span class="brand-name">TECH<span>ARENA</span></span>
+        </a>
+
+        <div class="topbar-right">
+            <div class="player-level">
+                <span class="level-icon">LVL</span>
+                <span id="player-level">01</span>
+            </div>
+            <div class="player-xp">
+                <span class="xp-symbol">✦</span>
+                <span id="player-xp">0 XP</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- PANTALLA PRINCIPAL -->
+        <section id="home-screen" class="screen active">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="eyebrow">
+                        <span class="status-dot"></span>
+                        SISTEMA EN LÍNEA
+                        <span class="eyebrow-divider">/</span>
+                        TEMPORADA 01
+                    </div>
+
+                    <h1>
+                        TU MENTE.<br>
+                        <span class="gradient-text">TU PODER.</span><br>
+                        TU ARENA.
+                    </h1>
+
+                    <p class="hero-description">
+                        Resuelve desafíos, domina la tecnología y demuestra
+                        que tienes lo necesario para convertirte en un
+                        <strong>maestro de sistemas.</strong>
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="button button-primary" id="play-button">
+                            <span>▶</span> ENTRAR A LA ARENA
+                        </button>
+                        <a href="#worlds-section" class="button button-secondary">
+                            EXPLORAR MUNDOS <span>↓</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div>
+                            <strong>04</strong>
+                            <span>MUNDOS</span>
+                        </div>
+                        <div>
+                            <strong>01</strong>
+                            <span>DISPONIBLE</span>
+                        </div>
+                        <div>
+                            <strong id="missions-completed">00</strong>
+                            <span>COMPLETADAS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-art" aria-label="Emblema de TECH ARENA">
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
+                    <div class="orbit orbit-three"></div>
+                    <div class="hero-emblem">
+                        <span class="emblem-small">TECH</span>
+                        <span class="emblem-large">ARENA</span>
+                        <span class="emblem-line"></span>
+                        <span class="emblem-caption">LEVEL UP YOUR MIND</span>
+                    </div>
+                    <span class="floating-tag tag-top">SYS_01</span>
+                    <span class="floating-tag tag-bottom">READY_PLAYER_01</span>
+                    <span class="spark spark-one">✦</span>
+                    <span class="spark spark-two">✧</span>
+                    <span class="spark spark-three">✦</span>
+                </div>
+            </div>
+
+            <section class="progress-panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">TU PROGRESO</span>
+                        <h2>Sube de nivel</h2>
+                    </div>
+                    <span class="rank-badge" id="player-rank">NOVATO DIGITAL</span>
+                </div>
+
+                <div class="progress-info">
+                    <span id="xp-progress-label">0 / 500 XP para el siguiente nivel</span>
+                    <span id="xp-progress-percent">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="xp-progress-bar"></div>
+                </div>
+            </section>
+
+            <section class="worlds-section" id="worlds-section">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">SELECCIONA TU DESTINO</span>
+                        <h2>Elige tu mundo</h2>
+                    </div>
+                    <span class="world-count">01 — 04</span>
+                </div>
+
+                <div class="world-grid">
+                    <article class="world-card hardware-card">
+                        <div class="world-card-top">
+                            <span class="world-number">WORLD_01</span>
+                            <span class="world-status available-status">● DISPONIBLE</span>
+                        </div>
+                        <div class="world-icon hardware-icon" aria-hidden="true">⌘</div>
+                        <h3>HARDWARE LAB</h3>
+                        <p>Construye, identifica y repara. Conoce lo que ocurre dentro de una computadora.</p>
+                        <div class="world-tags">
+                            <span>HARDWARE</span>
+                            <span>DIAGNÓSTICO</span>
+                        </div>
+                        <div class="world-card-bottom">
+                            <span>3 DESAFÍOS PROPUESTOS</span>
+                            <button class="world-button" data-world="hardware" aria-label="Entrar a Hardware Lab">↗</button>
+                        </div>
+                    </article>
+
+                    <article class="world-card cyber-card locked-card">
+                        <div class="world-card-top">
+                            <span class="world-number">WORLD_02</span>
+                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
+                        </div>
+                        <div class="world-icon cyber-icon" aria-hidden="true">⬡</div>
+                        <h3>CYBER DEFENSE</h3>
+                        <p>Detecta amenazas, descubre estafas y protege los sistemas de los atacantes.</p>
+                        <div class="world-tags">
+                            <span>SEGURIDAD</span>
+                            <span>INVESTIGACIÓN</span>
+                        </div>
+                        <div class="world-card-bottom">
+                            <span>SE DESBLOQUEARÁ DESPUÉS</span>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+                    </article>
+
+                    <article class="world-card creator-card locked-card">
+                        <div class="world-card-top">
+                            <span class="world-number">WORLD_03</span>
+                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
+                        </div>
+                        <div class="world-icon creator-icon" aria-hidden="true">&lt;/&gt;</div>
+                        <h3>DIGITAL CREATOR</h3>
+                        <p>Investiga, organiza información y resuelve problemas usando lógica digital.</p>
+                        <div class="world-tags">
+                            <span>INVESTIGACIÓN</span>
+                            <span>LÓGICA</span>
+                        </div>
+                        <div class="world-card-bottom">
+                            <span>SE DESBLOQUEARÁ DESPUÉS</span>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+                    </article>
+
+                    <article class="world-card ai-card locked-card">
+                        <div class="world-card-top">
+                            <span class="world-number">WORLD_04</span>
+                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
+                        </div>
+                        <div class="world-icon ai-icon" aria-hidden="true">✳</div>
+                        <h3>AI ARENA</h3>
+                        <p>Desafía a la inteligencia artificial, crea instrucciones y verifica sus respuestas.</p>
+                        <div class="world-tags">
+                            <span>INTELIGENCIA ARTIFICIAL</span>
+                            <span>IA</span>
+                        </div>
+                        <div class="world-card-bottom">
+                            <span>SE DESBLOQUEARÁ DESPUÉS</span>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="bottom-banner">
+                <div class="banner-symbol">!</div>
+                <div>
+                    <strong>¿ESTÁS LISTO PARA EL DESAFÍO?</strong>
+                    <p>El conocimiento es tu arma. La lógica es tu ventaja.</p>
+                </div>
+                <span class="banner-decoration">INSERT COIN ▸</span>
+            </section>
+        </section>
+
+        <!-- PANTALLA DE MISIÓN -->
+        <section id="mission-screen" class="screen mission-screen">
+            <button class="back-button" id="back-button">← VOLVER AL MENÚ</button>
+
+            <div class="mission-header">
+                <span class="section-kicker">HARDWARE LAB / MISIÓN 01</span>
+                <h1>LA PC NO ARRANCA<span class="title-period">.</span></h1>
+                <p>Piensa como un técnico. Diagnostica antes de reemplazar.</p>
+            </div>
+
+            <div class="mission-layout">
+                <div class="mission-main">
+                    <div class="mission-panel">
+                        <div class="panel-topline">
+                            <span>CASO #001</span>
+                            <span class="difficulty">DIFICULTAD: NORMAL</span>
+                        </div>
+
+                        <div class="computer-illustration" aria-hidden="true">
+                            <div class="monitor">
+                                <div class="monitor-screen">
+                                    <span class="screen-error">NO SIGNAL</span>
+                                    <span class="screen-cursor">_</span>
+                                </div>
+                                <div class="monitor-neck"></div>
+                                <div class="monitor-base"></div>
+                            </div>
+                            <div class="tower">
+                                <div class="tower-light"></div>
+                                <div class="tower-fan">✳</div>
+                                <div class="tower-slot"></div>
+                                <div class="tower-slot"></div>
+                            </div>
+                        </div>
+
+                        <div class="case-description">
+                            <span class="case-label">REPORTE DEL CLIENTE</span>
+                            <p>
+                                "Mi computadora enciende y los ventiladores giran,
+                                pero el monitor no muestra ninguna imagen.
+                                Necesito recuperar mi equipo."
+                            </p>
+                        </div>
+
+                        <div class="mission-question">
+                            <span class="question-number">01 / 01</span>
+                            <h2>¿Qué revisarías primero?</h2>
+                            <p>Selecciona la opción que consideres más razonable.</p>
+                        </div>
+
+                        <div class="answer-list" id="answer-list">
+                            <button class="answer-option" data-answer="a">
+                                <span class="answer-letter">A</span>
+                                <span>Comprobar la conexión del monitor y la memoria RAM.</span>
+                                <span class="answer-indicator">↗</span>
+                            </button>
+                            <button class="answer-option" data-answer="b">
+                                <span class="answer-letter">B</span>
+                                <span>Comprar una tarjeta gráfica nueva inmediatamente.</span>
+                                <span class="answer-indicator">↗</span>
+                            </button>
+                            <button class="answer-option" data-answer="c">
+                                <span class="answer-letter">C</span>
+                                <span>Formatear el disco duro para reparar la imagen.</span>
+                                <span class="answer-indicator">↗</span>
+                            </button>
+                        </div>
+
+                        <div id="feedback" class="feedback" aria-live="polite" hidden></div>
+
+                        <button id="check-answer" class="button button-primary check-button" disabled>
+                            CONFIRMAR RESPUESTA →
+                        </button>
+
+                        <button id="next-mission" class="button button-primary check-button" hidden>
+                            CONTINUAR →
+                        </button>
+                    </div>
+                </div>
+
+                <aside class="mission-sidebar">
+                    <div class="sidebar-panel">
+                        <span class="section-kicker">OBJETIVO</span>
+                        <h3>Diagnóstico técnico</h3>
+                        <p>Identifica posibles causas antes de decidir una solución.</p>
+                        <div class="objective-divider"></div>
+                        <div class="objective-row">
+                            <span>RECOMPENSA</span>
+                            <strong>+100 XP</strong>
+                        </div>
+                        <div class="objective-row">
+                            <span>INTENTOS</span>
+                            <strong id="attempt-count">03</strong>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-tip">
+                        <span class="tip-icon">✦</span>
+                        <span class="section-kicker">PISTA DEL SISTEMA</span>
+                        <p>No reemplaces un componente sin comprobar primero las causas más sencillas.</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- PANTALLA DE VICTORIA -->
+        <section id="result-screen" class="screen result-screen">
+            <div class="result-content">
+                <div class="victory-icon">★</div>
+                <span class="section-kicker">MISIÓN FINALIZADA</span>
+                <h1 id="result-title">¡MISIÓN COMPLETADA!</h1>
+                <p id="result-description">Has dado el primer paso dentro de TECH ARENA.</p>
+
+                <div class="result-reward">
+                    <span>EXPERIENCIA OBTENIDA</span>
+                    <strong id="result-xp">+100 XP</strong>
+                </div>
+
+                <div class="result-badge">
+                    <span>✦</span>
+                    <div>
+                        <strong id="result-badge-title">DIAGNÓSTICO INICIAL</strong>
+                        <p id="result-badge-description">Tu aventura tecnológica ha comenzado.</p>
+                    </div>
+                </div>
+
+                <button class="button button-primary" id="result-home-button">
+                    VOLVER A LA ARENA ↗
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>TECH ARENA © 2026</span>
+        <span>UN PROYECTO EDUCATIVO DE INGENIERÍA DE SISTEMAS</span>
+        <span>POWERED BY CURIOSITY ✦</span>
+    </footer>
+</body>
+</html>
