@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +6,7 @@
     <meta name="theme-color" content="#11101c">
     <title>TECH ARENA | Desafía tu mente</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="jspdf.umd.min.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -22,7 +22,10 @@
             <span class="brand-name">TECH<span>ARENA</span></span>
         </a>
 
-        <div class="topbar-right">
+        <div class="topbar-right" id="topbar-right" hidden>
+            <span class="player-name" id="player-name"></span>
+            <button type="button" class="topbar-button accent" id="download-report" title="Descargar informe en PDF">⇩ INFORME</button>
+            <button type="button" class="topbar-button" id="logout-button" title="Cerrar sesión">CERRAR SESIÓN</button>
             <div class="player-level">
                 <span class="level-icon">LVL</span>
                 <span id="player-level">01</span>
@@ -35,8 +38,40 @@
     </header>
 
     <main>
+        <!-- PANTALLA DE REGISTRO -->
+        <section id="login-screen" class="screen login-screen active">
+            <form class="login-card" id="login-form" autocomplete="off" novalidate>
+                <span class="section-kicker">NUEVO JUGADOR</span>
+                <h1>Crea tu perfil</h1>
+                <p>Tu progreso se guarda en este equipo. Si ya jugaste, escribe los mismos datos para continuar.</p>
+
+                <label class="login-field">
+                    <span>NOMBRE COMPLETO</span>
+                    <input type="text" name="nombre" maxlength="60" placeholder="Ej. Ana Torres" required>
+                </label>
+                <label class="login-field">
+                    <span>ESCUELA</span>
+                    <input type="text" name="escuela" maxlength="80" placeholder="Nombre de tu colegio" required>
+                </label>
+                <label class="login-field">
+                    <span>GRADO</span>
+                    <select name="grado" required>
+                        <option value="">Selecciona tu grado</option>
+                        <option>1.° de secundaria</option>
+                        <option>2.° de secundaria</option>
+                        <option>3.° de secundaria</option>
+                        <option>4.° de secundaria</option>
+                        <option>5.° de secundaria</option>
+                    </select>
+                </label>
+
+                <p class="login-error" id="login-error" role="alert" hidden></p>
+                <button type="submit" class="button button-primary">▶ ENTRAR A LA ARENA</button>
+            </form>
+        </section>
+
         <!-- PANTALLA PRINCIPAL -->
-        <section id="home-screen" class="screen active">
+        <section id="home-screen" class="screen">
             <div class="hero">
                 <div class="hero-content">
                     <div class="eyebrow">
@@ -73,8 +108,8 @@
                             <span>MUNDOS</span>
                         </div>
                         <div>
-                            <strong>01</strong>
-                            <span>DISPONIBLE</span>
+                            <strong>04</strong>
+                            <span>DISPONIBLES</span>
                         </div>
                         <div>
                             <strong id="missions-completed">00</strong>
@@ -147,10 +182,10 @@
                         </div>
                     </article>
 
-                    <article class="world-card cyber-card locked-card">
+                    <article class="world-card cyber-card">
                         <div class="world-card-top">
                             <span class="world-number">WORLD_02</span>
-                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
+                            <span class="world-status available-status">● DISPONIBLE</span>
                         </div>
                         <div class="world-icon cyber-icon" aria-hidden="true">⬡</div>
                         <h3>CYBER DEFENSE</h3>
@@ -160,15 +195,15 @@
                             <span>INVESTIGACIÓN</span>
                         </div>
                         <div class="world-card-bottom">
-                            <span>SE DESBLOQUEARÁ DESPUÉS</span>
-                            <span class="lock-icon">🔒</span>
+                            <span>3 DESAFÍOS PROPUESTOS</span>
+                            <button class="world-button" data-world="cyber" aria-label="Entrar a Cyber Defense">↗</button>
                         </div>
                     </article>
 
-                    <article class="world-card creator-card locked-card">
+                    <article class="world-card creator-card">
                         <div class="world-card-top">
                             <span class="world-number">WORLD_03</span>
-                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
+                            <span class="world-status available-status">● DISPONIBLE</span>
                         </div>
                         <div class="world-icon creator-icon" aria-hidden="true">&lt;/&gt;</div>
                         <h3>DIGITAL CREATOR</h3>
@@ -178,15 +213,15 @@
                             <span>LÓGICA</span>
                         </div>
                         <div class="world-card-bottom">
-                            <span>SE DESBLOQUEARÁ DESPUÉS</span>
-                            <span class="lock-icon">🔒</span>
+                            <span>3 DESAFÍOS PROPUESTOS</span>
+                            <button class="world-button" data-world="creator" aria-label="Entrar a Digital Creator">↗</button>
                         </div>
                     </article>
 
-                    <article class="world-card ai-card locked-card">
+                    <article class="world-card ai-card">
                         <div class="world-card-top">
                             <span class="world-number">WORLD_04</span>
-                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
+                            <span class="world-status available-status">● DISPONIBLE</span>
                         </div>
                         <div class="world-icon ai-icon" aria-hidden="true">✳</div>
                         <h3>AI ARENA</h3>
@@ -196,8 +231,8 @@
                             <span>IA</span>
                         </div>
                         <div class="world-card-bottom">
-                            <span>SE DESBLOQUEARÁ DESPUÉS</span>
-                            <span class="lock-icon">🔒</span>
+                            <span>3 DESAFÍOS PROPUESTOS</span>
+                            <button class="world-button" data-world="ai" aria-label="Entrar a AI Arena">↗</button>
                         </div>
                     </article>
                 </div>
@@ -213,25 +248,36 @@
             </section>
         </section>
 
+        <!-- PANTALLA DE NIVELES DE UN MUNDO -->
+        <section id="world-screen" class="screen mission-screen">
+            <button class="back-button" id="world-back-button">← VOLVER AL MENÚ</button>
+            <div class="mission-header">
+                <span class="section-kicker" id="world-kicker"></span>
+                <h1 id="world-title"></h1>
+                <p id="world-description"></p>
+            </div>
+            <div class="level-list" id="level-list"></div>
+        </section>
+
         <!-- PANTALLA DE MISIÓN -->
         <section id="mission-screen" class="screen mission-screen">
-            <button class="back-button" id="back-button">← VOLVER AL MENÚ</button>
+            <button class="back-button" id="back-button">← VOLVER AL MUNDO</button>
 
             <div class="mission-header">
-                <span class="section-kicker">HARDWARE LAB / MISIÓN 01</span>
-                <h1>LA PC NO ARRANCA<span class="title-period">.</span></h1>
-                <p>Piensa como un técnico. Diagnostica antes de reemplazar.</p>
+                <span class="section-kicker" id="mission-kicker">HARDWARE LAB / MISIÓN 01</span>
+                <h1><span id="mission-title">LA PC NO ARRANCA</span><span class="title-period">.</span></h1>
+                <p id="mission-tagline">Piensa como un técnico. Diagnostica antes de reemplazar.</p>
             </div>
 
             <div class="mission-layout">
                 <div class="mission-main">
                     <div class="mission-panel">
                         <div class="panel-topline">
-                            <span>CASO #001</span>
-                            <span class="difficulty">DIFICULTAD: NORMAL</span>
+                            <span id="mission-case">CASO #001</span>
+                            <span class="difficulty" id="mission-difficulty">DIFICULTAD: NORMAL</span>
                         </div>
 
-                        <div class="computer-illustration" aria-hidden="true">
+                        <div class="computer-illustration" id="mission-art" aria-hidden="true">
                             <div class="monitor">
                                 <div class="monitor-screen">
                                     <span class="screen-error">NO SIGNAL</span>
@@ -250,7 +296,7 @@
 
                         <div class="case-description">
                             <span class="case-label">REPORTE DEL CLIENTE</span>
-                            <p>
+                            <p id="case-text">
                                 "Mi computadora enciende y los ventiladores giran,
                                 pero el monitor no muestra ninguna imagen.
                                 Necesito recuperar mi equipo."
@@ -258,8 +304,8 @@
                         </div>
 
                         <div class="mission-question">
-                            <span class="question-number">01 / 01</span>
-                            <h2>¿Qué revisarías primero?</h2>
+                            <span class="question-number" id="question-number">01 / 03</span>
+                            <h2 id="question-title">¿Qué revisarías primero?</h2>
                             <p>Selecciona la opción que consideres más razonable.</p>
                         </div>
 
@@ -296,8 +342,8 @@
                 <aside class="mission-sidebar">
                     <div class="sidebar-panel">
                         <span class="section-kicker">OBJETIVO</span>
-                        <h3>Diagnóstico técnico</h3>
-                        <p>Identifica posibles causas antes de decidir una solución.</p>
+                        <h3 id="objective-title">Diagnóstico técnico</h3>
+                        <p id="objective-text">Identifica posibles causas antes de decidir una solución.</p>
                         <div class="objective-divider"></div>
                         <div class="objective-row">
                             <span>RECOMPENSA</span>
@@ -312,7 +358,7 @@
                     <div class="sidebar-tip">
                         <span class="tip-icon">✦</span>
                         <span class="section-kicker">PISTA DEL SISTEMA</span>
-                        <p>No reemplaces un componente sin comprobar primero las causas más sencillas.</p>
+                        <p id="tip-text">No reemplaces un componente sin comprobar primero las causas más sencillas.</p>
                     </div>
                 </aside>
             </div>
@@ -340,7 +386,7 @@
                 </div>
 
                 <button class="button button-primary" id="result-home-button">
-                    VOLVER A LA ARENA ↗
+                    VOLVER AL MUNDO ↗
                 </button>
             </div>
         </section>
