@@ -585,6 +585,7 @@ function updateMapRoutes() {
     const [hardware, cyber, creator, ai] = geometry.nodes;
     const middleX = (hardware.x + cyber.x) / 2;
     const middleY = (hardware.y + ai.y) / 2;
+    const outerX = Math.min(92, cyber.x + 12);
     const lowerY = Math.min(94, creator.y + 13);
     const npcPositions = {
         guide: { x: middleX, y: middleY },
@@ -606,8 +607,9 @@ function updateMapRoutes() {
         // El escudo se coloca sobre el tramo vertical real que sube hacia Cyber Defense.
         shield: { x: middleX, y: (middleY + cyber.y) / 2 },
         code: { x: middleX, y: (middleY + lowerY) / 2 },
-        // El cristal queda en el tramo vertical que conecta Creator con el sendero inferior.
-        crystal: { x: middleX, y: (creator.y + lowerY) / 2 },
+        // El cristal queda en el camino vertical del lado derecho, entre el cruce central y Creator.
+        // Este tramo pertenece al camino principal, así que se puede alcanzar caminando por la ruta.
+        crystal: { x: outerX, y: (middleY + creator.y) / 2 },
         key: { x: (hardware.x + middleX) / 2, y: middleY }
     };
     elements.mapCollectibles?.forEach(item => {
