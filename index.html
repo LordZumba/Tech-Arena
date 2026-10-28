@@ -32,7 +32,7 @@
             </div>
             <div class="player-xp">
                 <span class="xp-symbol">✦</span>
-                <span id="player-xp">0 XP</span>
+                <span id="player-xp">0 / 1200 XP</span>
             </div>
         </div>
     </header>
@@ -108,8 +108,8 @@
                             <span>MUNDOS</span>
                         </div>
                         <div>
-                            <strong>04</strong>
-                            <span>DISPONIBLES</span>
+                            <strong id="worlds-available">01</strong>
+                            <span>MUNDOS ABIERTOS</span>
                         </div>
                         <div>
                             <strong id="missions-completed">00</strong>
@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="progress-info">
-                    <span id="xp-progress-label">0 / 500 XP para el siguiente nivel</span>
+                    <span id="xp-progress-label">0 / 400 XP para el siguiente nivel</span>
                     <span id="xp-progress-percent">0%</span>
                 </div>
                 <div class="progress-track">
@@ -163,7 +163,123 @@
                     <span class="world-count">01 — 04</span>
                 </div>
 
-                <div class="world-grid">
+                <div class="arena-map-panel" id="arena-map-panel" aria-label="Mapa interactivo de TECH ARENA">
+                    <div class="arena-map-topline">
+                        <span><i class="map-live-dot"></i> MAPA DE LA ARENA</span>
+                        <span class="map-coordinate" id="map-coordinate">SECTOR 01 · 04</span>
+                    </div>
+                    <div class="arena-map" id="arena-map" role="group" aria-label="Selecciona un mundo con WASD, flechas o clic">
+                        <svg class="map-route" viewBox="0 0 800 390" preserveAspectRatio="none" aria-hidden="true">
+                            <path class="route-shadow" d="M144 94 L144 140 L144 195 L320 195 L320 94 L520 94 L520 195 L600 195 L600 281 L520 281 L320 281 L320 335 L144 335 L144 281 L144 195" />
+                            <path class="route-line" d="M144 94 L144 140 L144 195 L320 195 L320 94 L520 94 L520 195 L600 195 L600 281 L520 281 L320 281 L320 335 L144 335 L144 281 L144 195" />
+                            <path class="route-dashes" d="M144 94 L144 140 L144 195 L320 195 L320 94 L520 94 L520 195 L600 195 L600 281 L520 281 L320 281 L320 335 L144 335 L144 281 L144 195" />
+                        </svg>
+                        <div class="map-decoration map-tree map-tree-one" aria-hidden="true"><span></span></div>
+                        <div class="map-decoration map-tree map-tree-two" aria-hidden="true"><span></span></div>
+                        <div class="map-decoration map-crystal map-crystal-one" aria-hidden="true">◆</div>
+                        <div class="map-decoration map-crystal map-crystal-two" aria-hidden="true">✦</div>
+                        <div class="map-decoration map-rock map-rock-one" aria-hidden="true"></div>
+                        <div class="map-decoration map-rock map-rock-two" aria-hidden="true"></div>
+                        <button type="button" class="map-collectible collectible-chip" data-collectible="chip" aria-label="Chip de memoria: acércate y pulsa E"><span>▦</span><small>CHIP</small></button>
+                        <button type="button" class="map-collectible collectible-shield" data-collectible="shield" aria-label="Escudo digital: acércate y pulsa E"><span>⬡</span><small>ESCUDO</small></button>
+                        <button type="button" class="map-collectible collectible-code" data-collectible="code" aria-label="Fragmento de código: acércate y pulsa E"><span>{ }</span><small>CÓDIGO</small></button>
+                        <button type="button" class="map-collectible collectible-crystal" data-collectible="crystal" aria-label="Cristal de energía: acércate y pulsa E"><span>✦</span><small>ENERGÍA</small></button>
+                        <button type="button" class="map-collectible collectible-key" data-collectible="key" aria-label="Llave de datos: acércate y pulsa E"><span>⚿</span><small>LLAVE</small></button>
+                        <div class="map-house house-guide" aria-hidden="true"><span class="house-roof"></span><span class="house-body"><i></i><b></b></span><span class="house-sign">INFO</span></div>
+                        <div class="map-house house-workshop" aria-hidden="true"><span class="house-roof"></span><span class="house-body"><i></i><b></b></span><span class="house-sign">TALLER</span></div>
+                        <div class="map-house house-library" aria-hidden="true"><span class="house-roof"></span><span class="house-body"><i></i><b></b></span><span class="house-sign">ARCHIVO</span></div>
+                        <div class="map-npc npc-guide" data-npc="guide" data-npc-x="41.5" data-npc-y="48" aria-label="NPC Guía: presiona E para recibir una pista"><span class="npc-shadow"></span><span class="npc-hair"></span><span class="npc-face"><i></i><b></b></span><span class="npc-shirt"></span><span class="npc-label">NOVA</span></div>
+                        <div class="map-npc npc-tech" data-npc="tech" data-npc-x="65" data-npc-y="48" aria-label="NPC Técnico: presiona E para recibir una pista"><span class="npc-shadow"></span><span class="npc-hair"></span><span class="npc-face"><i></i><b></b></span><span class="npc-shirt"></span><span class="npc-label">BYTE</span></div>
+                        <div class="map-npc npc-librarian" data-npc="librarian" data-npc-x="41.5" data-npc-y="85" aria-label="NPC Bibliotecaria: presiona E para recibir una pista"><span class="npc-shadow"></span><span class="npc-hair"></span><span class="npc-face"><i></i><b></b></span><span class="npc-shirt"></span><span class="npc-label">PIXEL</span></div>
+                        <div class="map-sign sign-hardware" data-sign="hardware" data-sign-x="29" data-sign-y="16" aria-hidden="true"><span>➜</span> HARDWARE</div>
+                        <div class="map-sign sign-cyber" data-sign="cyber" data-sign-x="75" data-sign-y="16" aria-hidden="true"><span>➜</span> CYBER</div>
+                        <div class="map-sign sign-creator" data-sign="creator" data-sign-x="75" data-sign-y="64" aria-hidden="true"><span>➜</span> CREATOR</div>
+                        <div class="map-sign sign-ai" data-sign="ai" data-sign-x="28" data-sign-y="64" aria-hidden="true"><span>➜</span> AI ARENA</div>
+                        <button type="button" class="map-node map-hardware selected" data-map-world="hardware" aria-pressed="true" aria-label="Seleccionar Hardware Lab">
+                            <span class="map-node-number">01</span><span class="map-node-icon">⌘</span><strong>HARDWARE LAB</strong><small data-map-status="hardware">DISPONIBLE</small>
+                        </button>
+                        <button type="button" class="map-node map-cyber" data-map-world="cyber" aria-pressed="false" aria-label="Seleccionar Cyber Defense">
+                            <span class="map-node-number">02</span><span class="map-node-icon">⬡</span><strong>CYBER DEFENSE</strong><small data-map-status="cyber">BLOQUEADO</small>
+                        </button>
+                        <button type="button" class="map-node map-creator" data-map-world="creator" aria-pressed="false" aria-label="Seleccionar Digital Creator">
+                            <span class="map-node-number">03</span><span class="map-node-icon">&lt;/&gt;</span><strong>DIGITAL CREATOR</strong><small data-map-status="creator">BLOQUEADO</small>
+                        </button>
+                        <button type="button" class="map-node map-ai" data-map-world="ai" aria-pressed="false" aria-label="Seleccionar AI Arena">
+                            <span class="map-node-number">04</span><span class="map-node-icon">✳</span><strong>AI ARENA</strong><small data-map-status="ai">BLOQUEADO</small>
+                        </button>
+                        <div class="map-player-marker facing-down" id="map-player-marker" aria-hidden="true">
+                            <span class="player-shadow"></span>
+                            <svg class="player-sprite" viewBox="0 0 32 40" role="presentation">
+                                <g class="sprite-head"><rect x="8" y="2" width="16" height="4" fill="#2b183e"/><rect x="5" y="6" width="22" height="10" fill="#2b183e"/><rect x="8" y="6" width="16" height="9" fill="#f2b78e"/><rect x="5" y="10" width="5" height="5" fill="#2b183e"/><rect x="22" y="10" width="5" height="5" fill="#2b183e"/><rect x="9" y="10" width="4" height="3" fill="#251936"/><rect x="19" y="10" width="4" height="3" fill="#251936"/><rect x="13" y="14" width="6" height="2" fill="#cf786e"/></g>
+                                <g class="sprite-arms"><rect x="3" y="19" width="4" height="8" fill="#f2b78e"/><rect x="25" y="19" width="4" height="8" fill="#f2b78e"/></g>
+                                <rect x="7" y="17" width="18" height="10" fill="#8d65ff"/><rect x="10" y="19" width="12" height="6" fill="#63e8ff"/>
+                                <g class="sprite-leg leg-left"><rect x="10" y="27" width="5" height="8" fill="#2b183e"/><rect x="8" y="34" width="7" height="4" fill="#f2b78e"/></g><g class="sprite-leg leg-right"><rect x="17" y="27" width="5" height="8" fill="#2b183e"/><rect x="17" y="34" width="7" height="4" fill="#f2b78e"/></g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="map-console">
+                        <div class="map-selected-info" aria-live="polite">
+                            <span class="section-kicker" id="map-selected-kicker">MUNDO SELECCIONADO · 01</span>
+                            <h3 id="map-selected-title">HARDWARE LAB</h3>
+                            <p id="map-selected-description">Construye, identifica y repara. Conoce lo que ocurre dentro de una computadora.</p>
+                            <div class="map-progress-track"><span id="map-selected-progress"></span></div>
+                            <small id="map-selected-progress-label">0 / 3 MISIONES COMPLETADAS</small>
+                        </div>
+                        <div class="map-console-actions">
+                            <p class="map-controls-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> o <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> para moverte <span>·</span> <kbd>ENTER</kbd> para entrar</p>
+                            <p class="map-notice" id="map-notice" role="status">Elige un mundo y entra en la aventura.</p>
+                            <button type="button" class="button button-primary map-enter-button" id="map-enter-button">ENTRAR AL MUNDO ↗</button>
+                        </div>
+                    </div>
+                    <section class="map-collection" aria-label="Colección de objetos secretos">
+                        <div class="map-collection-heading"><div><span class="section-kicker">SECRETOS DE LA ARENA</span><h3>Tu colección</h3></div><strong id="collection-count">0 / 5</strong></div>
+                        <div class="collection-items" id="collection-items" aria-live="polite">
+                            <span class="collection-item" data-collection-item="chip"><b>▦</b><small>CHIP</small></span>
+                            <span class="collection-item" data-collection-item="shield"><b>⬡</b><small>ESCUDO</small></span>
+                            <span class="collection-item" data-collection-item="code"><b>{ }</b><small>CÓDIGO</small></span>
+                            <span class="collection-item" data-collection-item="crystal"><b>✦</b><small>ENERGÍA</small></span>
+                            <span class="collection-item" data-collection-item="key"><b>⚿</b><small>LLAVE</small></span>
+                        </div>
+                        <p class="collection-caption" id="collection-caption">Explora los caminos y recoge los 5 objetos secretos. Acércate y pulsa E.</p>
+                    </section>
+                    <section class="explorer-profile" aria-label="Perfil e insignias del explorador">
+                        <div class="explorer-profile-heading">
+                            <div><span class="section-kicker">TU IDENTIDAD EN LA ARENA</span><h3>Perfil de explorador</h3></div>
+                            <span class="explorer-title" id="explorer-title">RECLUTA DIGITAL</span>
+                        </div>
+                        <div class="explorer-profile-summary"><span class="explorer-avatar" aria-hidden="true">✦</span><div><strong id="explorer-name">Explorador</strong><small id="explorer-summary">Completa misiones y descubre secretos para ganar insignias.</small></div></div>
+                        <div class="explorer-badges" id="explorer-badges" aria-live="polite">
+                            <div class="explorer-badge is-locked" data-badge="first-mission"><span>⌁</span><strong>PRIMER PASO</strong><small>Completa una misión</small></div>
+                            <div class="explorer-badge is-locked" data-badge="npc-friend"><span>☻</span><strong>AMIGO DE LA ARENA</strong><small>Habla con los 3 NPC</small></div>
+                            <div class="explorer-badge is-locked" data-badge="collector"><span>✦</span><strong>CAZASECRETOS</strong><small>Encuentra los 5 objetos</small></div>
+                            <div class="explorer-badge is-locked" data-badge="arena-master"><span>★</span><strong>LEYENDA TECH</strong><small>Completa las 12 misiones</small></div>
+                        </div>
+                        <div class="achievement-progress" aria-label="Progreso de logros">
+                            <div class="achievement-progress-heading"><span>PROGRESO DE LOGROS</span><strong id="achievement-progress-label">0 / 4</strong></div>
+                            <div class="achievement-progress-track"><span id="achievement-progress-bar"></span></div>
+                        </div>
+                        <div class="achievement-card" id="achievement-card">
+                            <div class="achievement-card-top"><span>TECH ARENA</span><span>PLAYER CARD · 01</span></div>
+                            <div class="achievement-card-emblem" aria-hidden="true">✦</div>
+                            <div class="achievement-card-copy"><span class="section-kicker">TARJETA DE EXPLORADOR</span><h4 id="achievement-card-name">Explorador</h4><p id="achievement-card-title">RECLUTA DIGITAL</p></div>
+                            <div class="achievement-card-stats"><div><strong id="achievement-card-missions">0/12</strong><small>MISIONES</small></div><div><strong id="achievement-card-items">0/5</strong><small>SECRETOS</small></div><div><strong id="achievement-card-badges">0/4</strong><small>INSIGNIAS</small></div></div>
+                            <div class="achievement-card-footer">CURIOSIDAD · CREATIVIDAD · TECNOLOGÍA</div>
+                        </div>
+                        <div class="achievement-actions">
+                            <button type="button" class="button button-primary" id="download-achievement-card">DESCARGAR TARJETA PDF ↗</button>
+                            <span>Guarda tu tarjeta y comparte tus logros al finalizar.</span>
+                        </div>
+                        <p class="explorer-profile-caption" id="explorer-profile-caption">Las insignias se desbloquean jugando. Tu título cambia con tus logros.</p>
+                    </section>
+                </div>
+
+                <div class="section-heading quick-worlds-heading">
+                    <div>
+                        <span class="section-kicker">ACCESO ALTERNATIVO</span>
+                        <h2>Selecciona desde la lista</h2>
+                    </div>
+                </div>
+                <div class="world-grid world-grid-reference">
                     <article class="world-card hardware-card">
                         <div class="world-card-top">
                             <span class="world-number">WORLD_01</span>
@@ -177,15 +293,15 @@
                             <span>DIAGNÓSTICO</span>
                         </div>
                         <div class="world-card-bottom">
-                            <span>3 DESAFÍOS PROPUESTOS</span>
-                            <button class="world-button" data-world="hardware" aria-label="Entrar a Hardware Lab">↗</button>
+                            <span class="world-progress" data-world-count="hardware">0 / 3 MISIONES</span>
+                            <button type="button" class="world-button" data-world="hardware" aria-label="Entrar a Hardware Lab">↗</button>
                         </div>
                     </article>
 
-                    <article class="world-card cyber-card">
+                    <article class="world-card cyber-card locked-card">
                         <div class="world-card-top">
                             <span class="world-number">WORLD_02</span>
-                            <span class="world-status available-status">● DISPONIBLE</span>
+                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
                         </div>
                         <div class="world-icon cyber-icon" aria-hidden="true">⬡</div>
                         <h3>CYBER DEFENSE</h3>
@@ -195,15 +311,15 @@
                             <span>INVESTIGACIÓN</span>
                         </div>
                         <div class="world-card-bottom">
-                            <span>3 DESAFÍOS PROPUESTOS</span>
-                            <button class="world-button" data-world="cyber" aria-label="Entrar a Cyber Defense">↗</button>
+                            <span class="world-progress" data-world-count="cyber">0 / 3 MISIONES</span>
+                            <button type="button" class="world-button" data-world="cyber" aria-label="Mundo bloqueado: Cyber Defense" disabled>🔒</button>
                         </div>
                     </article>
 
-                    <article class="world-card creator-card">
+                    <article class="world-card creator-card locked-card">
                         <div class="world-card-top">
                             <span class="world-number">WORLD_03</span>
-                            <span class="world-status available-status">● DISPONIBLE</span>
+                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
                         </div>
                         <div class="world-icon creator-icon" aria-hidden="true">&lt;/&gt;</div>
                         <h3>DIGITAL CREATOR</h3>
@@ -213,15 +329,15 @@
                             <span>LÓGICA</span>
                         </div>
                         <div class="world-card-bottom">
-                            <span>3 DESAFÍOS PROPUESTOS</span>
-                            <button class="world-button" data-world="creator" aria-label="Entrar a Digital Creator">↗</button>
+                            <span class="world-progress" data-world-count="creator">0 / 3 MISIONES</span>
+                            <button type="button" class="world-button" data-world="creator" aria-label="Mundo bloqueado: Digital Creator" disabled>🔒</button>
                         </div>
                     </article>
 
-                    <article class="world-card ai-card">
+                    <article class="world-card ai-card locked-card">
                         <div class="world-card-top">
                             <span class="world-number">WORLD_04</span>
-                            <span class="world-status available-status">● DISPONIBLE</span>
+                            <span class="world-status locked-status">🔒 BLOQUEADO</span>
                         </div>
                         <div class="world-icon ai-icon" aria-hidden="true">✳</div>
                         <h3>AI ARENA</h3>
@@ -231,8 +347,8 @@
                             <span>IA</span>
                         </div>
                         <div class="world-card-bottom">
-                            <span>3 DESAFÍOS PROPUESTOS</span>
-                            <button class="world-button" data-world="ai" aria-label="Entrar a AI Arena">↗</button>
+                            <span class="world-progress" data-world-count="ai">0 / 3 MISIONES</span>
+                            <button type="button" class="world-button" data-world="ai" aria-label="Mundo bloqueado: AI Arena" disabled>🔒</button>
                         </div>
                     </article>
                 </div>
@@ -244,13 +360,13 @@
                     <strong>¿ESTÁS LISTO PARA EL DESAFÍO?</strong>
                     <p>El conocimiento es tu arma. La lógica es tu ventaja.</p>
                 </div>
-                <span class="banner-decoration">INSERT COIN ▸</span>
+                <button type="button" class="banner-decoration" id="insert-coin-button" aria-label="Insertar moneda y entrar a la arena">INSERT COIN ▸</button>
             </section>
         </section>
 
         <!-- PANTALLA DE NIVELES DE UN MUNDO -->
         <section id="world-screen" class="screen mission-screen">
-            <button class="back-button" id="world-back-button">← VOLVER AL MENÚ</button>
+            <button type="button" class="back-button" id="world-back-button">← VOLVER AL MENÚ</button>
             <div class="mission-header">
                 <span class="section-kicker" id="world-kicker"></span>
                 <h1 id="world-title"></h1>
@@ -261,7 +377,7 @@
 
         <!-- PANTALLA DE MISIÓN -->
         <section id="mission-screen" class="screen mission-screen">
-            <button class="back-button" id="back-button">← VOLVER AL MUNDO</button>
+            <button type="button" class="back-button" id="back-button">← VOLVER AL MUNDO</button>
 
             <div class="mission-header">
                 <span class="section-kicker" id="mission-kicker">HARDWARE LAB / MISIÓN 01</span>
